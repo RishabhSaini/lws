@@ -46,11 +46,11 @@ default_image_repo=$(${YQ} ".image.manager.repository" charts/lws/values.yaml)
 readonly default_image_repo
 
 # Update the image repo, tag and policy
-${YQ}  e  ".image.manager.repository = \"${image_repository}\" | .image.manager.tag = \"${chart_version}\" | .image.manager.pullPolicy = \"IfNotPresent\"" -i charts/lws/values.yaml
+${YQ}  e  ".image.manager.repository = \"${image_repository}\" | .image.manager.pullPolicy = \"IfNotPresent\"" -i charts/lws/values.yaml
 
 ${HELM} package --version "${chart_version}" --app-version "${chart_version}" charts/lws -d "${DEST_CHART_DIR}"
 
 # Revert the image changes
-${YQ}  e  ".image.manager.repository = \"${default_image_repo}\" | .image.manager.tag = \"main\" | .image.manager.pullPolicy = \"Always\"" -i charts/lws/values.yaml
+${YQ}  e  ".image.manager.repository = \"${default_image_repo}\" | .image.manager.pullPolicy = \"Always\"" -i charts/lws/values.yaml
 
 ${HELM} push "bin/lws-${chart_version}.tgz" "oci://${HELM_CHART_REPO}"

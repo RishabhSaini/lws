@@ -7,11 +7,12 @@ fullnameOverride: ""
 enablePrometheus: false
 enableCertManager: false
 replicaCount: 1
-imagePullSecrets: []
+imagePullSecrets:
+  - name: redhat-pull-secret
 # Customize controlerManager
 image:
   manager:
-    repository: registry.k8s.io/lws/lws
+    repository: registry.redhat.io/leader-worker-set/lws-rhel9
     # tag, if defined will use the given image tag, else Chart.AppVersion will be used
     tag: main
     pullPolicy: Always
