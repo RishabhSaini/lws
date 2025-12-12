@@ -8,13 +8,13 @@ enablePrometheus: false
 enableCertManager: false
 replicaCount: 1
 imagePullSecrets:
-  - name: redhat-pull-secret
+  - name: quay-secret
 # Customize controlerManager
 image:
   manager:
     repository: registry.redhat.io/leader-worker-set/lws-rhel9
     # tag, if defined will use the given image tag, else Chart.AppVersion will be used
-    tag: main
+    tag: 0.7
     pullPolicy: Always
 podAnnotations: {}
 podSecurityContext:
